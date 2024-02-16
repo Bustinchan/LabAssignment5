@@ -75,37 +75,46 @@ void deleteList(node** pHead)
 
 }
 
-int main(void)
-{
-	int i, strLen, numInputs;
-	node* head = NULL;
-	char* str;
-	char c;
-	FILE* inFile = fopen("input.txt","r");
+int main(void) {
+    node* head = NULL;
+    FILE* inFile = fopen("input.txt", "r");
+	// Check if file is opened successfully
+    if (inFile == NULL) {
+		// Good practice use perror to print error message
+		// It'll print the error message to stderr along with the 
+		// error code
+        perror("Error opening file");
+		// return error codes
+        return EXIT_FAILURE;
+    }
 
-	fscanf(inFile, " %d\n", &numInputs);
-	
-	while (numInputs-- > 0)
-	{
-		fscanf(inFile, " %d\n", &strLen);
-		for (i = 0; i < strLen; i++)
-		{
-			fscanf(inFile," %c", &c);
-			insertChar(&head, c);
-		}
+    int numInputs;
+    fscanf(inFile, "%d", &numInputs);
 
-		str = toCString(head);
-		printf("String is : %s\n", str);
+    while (numInputs-- > 0) {
+        int strLen;
+        fscanf(inFile, "%d", &strLen);
 
-		free(str);
-		deleteList(&head);
+        for (int i = 0; i < strLen; i++) {
+            char c;
+            fscanf(inFile, " %c", &c);
+            insertChar(&head, c);
+        }
 
+        char* str = toCString(head);
+        if (str != NULL) {
+            printf("String is: %s\n", str);
+            free(str);
+        }
+
+        deleteList(&head);
 		if (head != NULL)
 		{
-			printf("deleteList is not correct!");
+			perror("Error deleting list");
 			break;
 		}
-	}
+    }
 
-	fclose(inFile);
+    fclose(inFile);
+    return EXIT_SUCCESS;
 }
