@@ -39,7 +39,7 @@ char* toCString(node* head)
 	return str;
 }
 
-// inserts character to the linkedlist
+// appends character to the linkedlist
 // f the linked list is head -> |a|->|b|->|c|
 // then insertChar(&head, 'x') will update the linked list as foolows:
 // head -> |a|->|b|->|c|->|x|
