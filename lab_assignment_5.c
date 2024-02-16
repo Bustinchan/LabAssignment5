@@ -19,24 +19,18 @@ int length(node* head)
 }
 
 // parses the string in the linkedList
-//  if the linked list is head -> |a|->|b|->|c|
-//  then toCString function wil return "abc"
-char* toCString(node* head)
-{
-	node* current = head;
-	int size = length(head);
-	int index = 0;
+// if the linked list is head -> |a|->|b|->|c|
+// then toCString function wil return "abc"
+char* toCString(node* head) {
+    int len = length(head);
+    char* str = malloc(len + 1);
+    if (str == NULL) return NULL;
 
-	char* str = (char*)malloc(sizeof(char)*(size+1));
-	if (str == NULL) return NULL;
-
-	while (current != NULL){
-		str[index] = current->letter;
-		index++;
-		current=current->next;
-	}
-	str[size] = '\0';
-	return str;
+    for (int i = 0; head != NULL; head = head->next, i++) {
+        str[i] = head->letter;
+    }
+    str[len] = '\0';
+    return str;
 }
 
 // appends character to the linkedlist
