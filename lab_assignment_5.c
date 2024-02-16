@@ -45,6 +45,11 @@ char* toCString(node* head)
 // head -> |a|->|b|->|c|->|x|
 void insertChar(node** pHead, char c)
 {
+	// Traversing the linked list every time to add a new node
+	// is not efficient. A common optimization is to keep a pointer to the
+	// last node in the linked list. This way we can add a new node
+	// in O(1) time. This is called a tail pointer.
+	// I'll leave it to you to implement this optimization.
 	node* newNode = (node*)malloc(sizeof(node));
 	if (newNode == NULL) return;
 	newNode->letter = c;
@@ -55,7 +60,10 @@ void insertChar(node** pHead, char c)
 	}
 	else{
 		node *current = *pHead;
-		while(current->next != NULL && current != NULL){
+		// don't need to check  `current != NULL`
+		// as the if next is NULL then it will break the loop
+		// and the newNode will be added to the end of the list
+		while(current->next != NULL){
 			current = current->next;
 		}
 		current->next = newNode;
