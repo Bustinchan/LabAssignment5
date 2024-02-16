@@ -7,16 +7,21 @@ typedef struct node {
 } node;
 
 // Returns number of nodes in the linkedList.
-int length(node* head)
-{
-	node* current = head;
-	int length = 0;
-	while(current != NULL){
-		length++;
-		current = current->next;
-	}
-	return length;
+int length(node* head) {
+	// TODO:
+	// this is a common pattern to traverse a linked list
+	// but it's O(n) time complexity. We could add a length
+	// member to the linked list struct and update it every time 
+	// we add or remove a node. This way we can get the length
+	// in O(1) time.
+    int length = 0;
+    while (head != NULL) {
+        length++;
+        head = head->next;
+    }
+    return length;
 }
+
 
 // parses the string in the linkedList
 // if the linked list is head -> |a|->|b|->|c|
