@@ -63,16 +63,12 @@ void insertChar(node** pHead, char c)
 }
 
 // deletes all nodes in the linkedList.
-void deleteList(node** pHead)
-{
-	node* todelete = *pHead;
-	while(*pHead != NULL){
-		todelete = *pHead;
-		*pHead = (*pHead)->next;
-		free(todelete);
-	}
-	return;
-
+void deleteList(node** pHead) {
+    while (*pHead != NULL) {
+        node* todelete = *pHead;
+        *pHead = (*pHead)->next;
+        free(todelete);
+    }
 }
 
 int main(void) {
